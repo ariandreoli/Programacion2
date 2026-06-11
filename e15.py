@@ -1,7 +1,7 @@
 from PIL import Image
 import numpy as np
 
-imag = Image.open("imagen.jpg")
+imag = Image.open("maki.jpg")
 
 imagris = imag.convert("L")
 
