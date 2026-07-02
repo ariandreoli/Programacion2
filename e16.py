@@ -1,24 +1,34 @@
 from PIL import Image
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 
-imagenpil = Image.open("maki.jpg")
-imagen = np.array(imagenpil)
+img = Image.open("maki.jpg")
+M = np.array(img)
 
-
-def convertgrises(img):
-    R = img[:, :, 0]
-    G = img[:, :, 1]
-    B = img[:, :, 2]
-    return R * 0.2989 + G * 0.5870 + B * 0.1140
-
-
-imagengris = convertgrises(imagen)
-
-plt.imshow(imagen)
-plt.title("Imagen Original a color")
+plt.imshow(M)
+plt.title("Imagen Original")
 plt.show()
 
-plt.imshow(imagengris, cmap="gray")
-plt.title("Imagen a Gris")
+def gris(imagen):
+
+    filas = imagen.shape[0]
+    columnas = imagen.shape[1]
+
+G = np.zeros((filas, columnas), dtype=int)
+
+    for i in range(filas):
+        for j in range(columnas):
+
+            r = imagen[i][j][0]
+            g = imagen[i][j][1]
+            b = imagen[i][j][2]
+
+            G[i][j] = 0.299*r + 0.587*g + 0.114*b
+
+    return G
+
+grisimg = gris(M)
+
+plt.imshow(grisimg, cmap="gray")
+plt.title("Escala de Grises")
 plt.show()
